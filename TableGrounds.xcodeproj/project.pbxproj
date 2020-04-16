@@ -352,7 +352,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/oneleif/SwiftUIKit";
 			requirement = {
-				branch = feature/TableView;
+				branch = develop;
 				kind = branch;
 			};
 		};

@@ -5,8 +5,8 @@
         "package": "SwiftUIKit",
         "repositoryURL": "https://github.com/oneleif/SwiftUIKit",
         "state": {
-          "branch": "feature/TableView",
-          "revision": "13a04ff7d0b9590e393cfbed7d9b855274a71361",
+          "branch": "develop",
+          "revision": "6fee65e3b0c0f99354e2abfbc499af6240f9e57d",
           "version": null
         }
       }
