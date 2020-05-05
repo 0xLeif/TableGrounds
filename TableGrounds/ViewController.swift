@@ -62,7 +62,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        table.register(cells: [PostCell.ID: PostCell.self])
+        table.register(cells: [PostCell.self])
         
         
         view.embed {
