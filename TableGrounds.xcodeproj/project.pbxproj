@@ -13,7 +13,7 @@
 		29AACAC92447F61D001CE1CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29AACAC72447F61D001CE1CC /* Main.storyboard */; };
 		29AACACB2447F61F001CE1CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29AACACA2447F61F001CE1CC /* Assets.xcassets */; };
 		29AACACE2447F61F001CE1CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29AACACC2447F61F001CE1CC /* LaunchScreen.storyboard */; };
-		29AACAD72447F649001CE1CC /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 29AACAD62447F649001CE1CC /* SwiftUIKit */; };
+		29FBB986244E6E5000380521 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 29FBB985244E6E5000380521 /* SwiftUIKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29AACAD72447F649001CE1CC /* SwiftUIKit in Frameworks */,
+				29FBB986244E6E5000380521 /* SwiftUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +86,7 @@
 			);
 			name = TableGrounds;
 			packageProductDependencies = (
-				29AACAD62447F649001CE1CC /* SwiftUIKit */,
+				29FBB985244E6E5000380521 /* SwiftUIKit */,
 			);
 			productName = TableGrounds;
 			productReference = 29AACABE2447F61D001CE1CC /* TableGrounds.app */;
@@ -117,7 +117,7 @@
 			);
 			mainGroup = 29AACAB52447F61D001CE1CC;
 			packageReferences = (
-				29AACAD52447F649001CE1CC /* XCRemoteSwiftPackageReference "SwiftUIKit" */,
+				29FBB984244E6E5000380521 /* XCRemoteSwiftPackageReference "SwiftUIKit" */,
 			);
 			productRefGroup = 29AACABF2447F61D001CE1CC /* Products */;
 			projectDirPath = "";
@@ -348,20 +348,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		29AACAD52447F649001CE1CC /* XCRemoteSwiftPackageReference "SwiftUIKit" */ = {
+		29FBB984244E6E5000380521 /* XCRemoteSwiftPackageReference "SwiftUIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/oneleif/SwiftUIKit";
+			repositoryURL = "https://github.com/0xLeif/SwiftUIKit";
 			requirement = {
-				branch = develop;
+				branch = feature/tableViewDataSourceMethods;
 				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		29AACAD62447F649001CE1CC /* SwiftUIKit */ = {
+		29FBB985244E6E5000380521 /* SwiftUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 29AACAD52447F649001CE1CC /* XCRemoteSwiftPackageReference "SwiftUIKit" */;
+			package = 29FBB984244E6E5000380521 /* XCRemoteSwiftPackageReference "SwiftUIKit" */;
 			productName = SwiftUIKit;
 		};
 /* End XCSwiftPackageProductDependency section */

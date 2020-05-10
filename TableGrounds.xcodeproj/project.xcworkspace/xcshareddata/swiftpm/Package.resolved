@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "SwiftUIKit",
-        "repositoryURL": "https://github.com/oneleif/SwiftUIKit",
+        "repositoryURL": "https://github.com/0xLeif/SwiftUIKit",
         "state": {
-          "branch": "develop",
-          "revision": "6fee65e3b0c0f99354e2abfbc499af6240f9e57d",
+          "branch": "feature/tableViewDataSourceMethods",
+          "revision": "a256396aaeddc9ec5e83ac2fee2792a7b4670864",
           "version": null
         }
       }

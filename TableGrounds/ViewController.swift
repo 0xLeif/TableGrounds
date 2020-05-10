@@ -56,36 +56,131 @@ let json = """
 ]
 """
 
-class ViewController: UIViewController {
-    var table = TableView()
+struct SomeVM {
+    var text = "Leif"
+}
+
+class SomeVC: UIViewController {
+    var viewModel = SomeVM()
+    
+    lazy var label = Label(self.viewModel.text)
+    lazy var field = Field(value: self.viewModel.text, placeholder: "", keyboardType: .default).inputHandler { [weak self] (value) in
+        self?.viewModel.text = value
+    }
+    
+    deinit {
+        print("SomeVD DEINIT")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        table.register(cells: [PostCell.ID: PostCell.self])
+        label.text = "Hello World"
         
-        
-        view.embed {
-            table
+        view
+            .background(color: .white)
+            .embed {
+                VStack(distribution: .fillEqually) {
+                    [
+                    label,
+                    field,
+                    Button("Update") { [weak self] in
+                        self?.label.text = self?.viewModel.text ?? ""
+                        },
+                    Spacer()
+                    ]
+                }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
+        label.text?.append(contentsOf: "+")
+    }
+}
+
+class ViewController: UIViewController {
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         guard let data = json.data(using: .utf8),
             let demoPosts = try? JSONDecoder().decode([Post].self, from: data) else {
                 return
                 
         }
-        table.append {
-            [
-                demoPosts
-            ]
-        }
-        .reloadData()
         
+        Navigate.shared.configure(controller: navigationController)
+            .set(title: "TableGrounds")
+            .setRight(barButton: UIBarButtonItem {
+                Button("Leak?") {
+                    Navigate.shared.go(SomeVC(), style: .push)
+                }
+            })
+        
+        view.embed {
+            Button("Go") {
+                Navigate.shared.go(from: self, to: UIViewController {
+                    let table = TableView()
+                    
+                    table.register(cells: [PostCell.self])
+                        .canEditRowAtIndexPath { _ in true }
+                        .shouldHighlightRowAtIndexPath { _ in true }
+                        .didSelectRowAtIndexPath { print($0) }
+                        .leadingSwipeActionsConfigurationForRowAtIndexPath { (path) -> UISwipeActionsConfiguration in
+                            UISwipeActionsConfiguration(actions: [
+                                UIContextualAction(style: .normal, title: "Some Action", handler: { (action, view, comp) in
+                                    
+                                    view.backgroundColor = .cyan
+                                    table.update { (data) -> [[CellDisplayable]] in
+                                        var newData = data
+                                        var post = newData[path.section][path.row] as? Post
+                                        post?.title = "New Title from Swipe!"
+                                        newData[path.section][path.row] = post!
+                                        return newData
+                                    }.reloadData()
+                                    
+                                    comp(true)
+                                }).configure {
+                                    $0.backgroundColor = .blue
+                                    
+                                }
+                            ])
+                    }
+                    .canMoveRowAtIndexPath { _ in true }
+                    .moveRowAtSourceIndexPathToDestinationIndexPath { (from, to) in
+                        table.update { (data) -> [[CellDisplayable]] in
+                            var newData = data
+                            let toData = newData[to.section][to.row]
+                            newData[to.section][to.row] = newData[from.section][from.row]
+                            newData[from.section][from.row] = toData
+                            return newData
+                        }.reloadData()
+                    }
+                    
+                    // Test Move
+//                    table.isEditing = true
+                    
+                    table.append {
+                        [
+                            demoPosts
+                        ]
+                    }
+                    .reloadData()
+                    
+                    
+                    return UIView {
+                        table
+                    }
+                }, style: .push)
+            }
+        }
     }
 }
 
 struct Post {
-    let title: String
+    var title: String
     let description: String
     let author: String
     let tags: [String]
@@ -123,10 +218,10 @@ extension PostCell: TableViewCell {
             .embed(withPadding: 16) {
                 VStack(withSpacing: 4) {
                     [
-                        LoadingImage(olURL)
-                            .frame(height: 164)
-                            .contentMode(.scaleAspectFit)
-                            .padding(32),
+//                        LoadingImage(olURL)
+//                            .frame(height: 164)
+//                            .contentMode(.scaleAspectFit)
+//                            .padding(32),
                         titleLabel,
                         authorLabel,
                         descriptionLabel
@@ -134,7 +229,7 @@ extension PostCell: TableViewCell {
                     ]
                 }
                 .padding(16)
-                .background(color: .white)
+                .background(color: .clear)
                 .layer(borderWidth: 1)
                 .layer(borderColor: UIColor.gray.withAlphaComponent(0.1).cgColor)
                 .layer(cornerRadius: 8)
